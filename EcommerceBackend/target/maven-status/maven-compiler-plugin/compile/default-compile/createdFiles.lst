@@ -1,0 +1,5 @@
+com\dao\UserDao.class
+com\daoimpl\UserDaoImpl.class
+com\model\User.class
+com\config\HibernateConfigration.class
+comm\EcommerceBackend\App.class
