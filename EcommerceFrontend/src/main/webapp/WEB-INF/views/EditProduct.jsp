@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     
@@ -15,8 +16,8 @@
 </head>
 <body>
 
-<form:form modelAttribute="cmdd" method="post" action="/EcommerceFrontend/Save">    
-        <table >    
+<form:form modelAttribute="cmdd" method="post" action="/EcommerceFrontend/Save" enctype="multipart/form-data" >    
+        <table>
         <tr>  
          
          <td><form:hidden  path="proid" readonly="true" style="border:none"/></td> 
@@ -35,32 +36,36 @@
           <td><form:input path="price" /></td>  
          </tr>   
         
-         <select name="categoryId" id="procat"
-        class="form-control">
+        <tr><td> <select name="categoryId" id="procat" class="form-control">
          <option value="NONE" >--- Select Category ---</option>
         <c:forEach var="cat" items="${catlist}">
         <option value="${cat.categoryid}">${cat.categoryname}</option>
         </c:forEach>
-         </select> <br>
+         </select></td></tr> <br> 
          
           
-           <select name="supplierId" id="prosup"
+           <tr><td> <select name="supplierId" id="prosup"
         class="form-control">
          <option value="NONE" >--- Select Supplier ---</option>
         <c:forEach var="sup" items="${suplist}">
         <option value="${sup.sid}">${sup.sname}</option>
         </c:forEach>
-         </select> <br>
+         </select> </td></tr><br>  
          
-         
-									<div class="fileinput fileinput-new" data-provides="fileinput">
+         		 <tr><td><div class="fileinput fileinput-new" data-provides="fileinput">
 										<input class="form-control" type="file" name="file"
 											 placeholder="Select image">
-											 </div> 
-           <tr>        
-          <td><input type="submit" value="Save" /></td>    
-         </tr>    
-        </table>    
+
+									</div></td></tr>
+									
+									
+							<tr><td><Button type="submit" class="btn btn-primary">Submit</Button>
+							<br>
+							<br>
+							<Button type="reset" class="btn btn-danger">Reset</Button></td></tr>
+							
+            
+         </table>
        </form:form> 
 </body>
 </html>

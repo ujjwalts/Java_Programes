@@ -156,17 +156,57 @@ public class AdminController {
 		mav.setViewName("redirect:/viewPro");  
 		return mav;
 	}
+	
+	
+	
 	@RequestMapping(value="/editpro/{proid}")
 	public ModelAndView update(@PathVariable int proid){
 		Product p=productdao.getProductById(proid);
-		return new ModelAndView("EditProduct","cmdd",p);
+		ModelAndView mav=new ModelAndView("EditProduct","cmdd",p);
+		List<Category> cl=categorydao.categoryList();//(drop down list)
+		mav.addObject("catlist",cl);//(drop down list)
+		
+		List<Supplier> sl=supplierdao.supplierList();
+		mav.addObject("suplist",sl);
+		
+		
+		return mav;
 	}
+	
+	
 
 	@RequestMapping(value="/Save",method=RequestMethod.POST)
-	public ModelAndView updateSave(@ModelAttribute ("cmdd")Product p){
+	public ModelAndView updateSave(@ModelAttribute ("cmdd")Product p,@RequestParam("file") MultipartFile file,HttpServletRequest request){
+	
+
+		p.setCategory(categorydao.getCategoryById(Integer.parseInt(request.getParameter("categoryId"))));//(drop down list)
+		p.setSupplier(supplierdao.getSupplierById(Integer.parseInt(request.getParameter("supplierId"))));
+		
+
+		String filepath=request.getSession().getServletContext().getRealPath("/");
+		String originalfile=file.getOriginalFilename();
+		
 		productdao.updateProduct(p);
+		
+		System.out.println(filepath+originalfile);//optional
+		try
+		{
+			byte imagebyte[] = file.getBytes();
+			BufferedOutputStream fos=new BufferedOutputStream(new FileOutputStream(filepath+"/Images/"+p.getProid()+".jpg"));
+			System.out.println("FilePath"+filepath);
+			fos.write(imagebyte);
+			fos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		return new ModelAndView("redirect:/viewPro");
 	}
+	
+	
+	
+	
 	
 	
 	

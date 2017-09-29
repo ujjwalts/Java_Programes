@@ -2,18 +2,19 @@ package com.daoimpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.dao.SupplierDao;
-import com.model.Product;
 import com.model.Supplier;
 
+@Transactional
 @Repository
 public class SupplierDaoImpl implements SupplierDao {
 	
@@ -39,10 +40,11 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	}
 
-@Transactional
+
 	public Supplier getSupplierById(int sid) {
-		Session session=sessionfactory.openSession();
-		Supplier s=session.load(Supplier.class,sid);
+
+		Supplier s=sessionfactory.getCurrentSession().load(Supplier.class,sid);
+		
 		return s;
 	}
 

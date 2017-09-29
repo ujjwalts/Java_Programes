@@ -17,7 +17,7 @@ import com.model.Product;
 
 
 @Repository
-
+@Transactional
 public class CategoryDaoImpl implements CategoryDao{
 	
 	@Autowired
@@ -42,10 +42,10 @@ public class CategoryDaoImpl implements CategoryDao{
 	return list;
 }
 
-	@Transactional
+
 	public Category getCategoryById(int categoryid) {
-		Session session=sessionfactory.openSession();
-		Category c=session.load(Category.class,categoryid);
+		
+		Category c=sessionfactory.getCurrentSession().load(Category.class,categoryid);
 		return c;
 		
 	}
