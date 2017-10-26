@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.model.Supplier;
 
 
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminController {
 	@Autowired
 	Product p;
@@ -87,7 +89,7 @@ public class AdminController {
 		
 		ModelAndView mav = new ModelAndView();
 	
-		mav.setViewName("redirect:/addPro");
+		mav.setViewName("redirect:/admin/addPro");
 		return mav;
 
 	}
@@ -108,7 +110,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 		
 		categorydao.SaveCategory(c);
-		mav.setViewName("redirect:/addPro");
+		mav.setViewName("redirect:/admin/addPro");
 		return mav;
 
 	}
@@ -153,7 +155,7 @@ public class AdminController {
 	{
 		ModelAndView mav=new ModelAndView();
 		productdao.deleteProduct(proid);
-		mav.setViewName("redirect:/viewPro");  
+		mav.setViewName("redirect:/admin/viewPro");  
 		return mav;
 	}
 	
@@ -201,11 +203,18 @@ public class AdminController {
 		{
 			e.printStackTrace();
 		}
-		return new ModelAndView("redirect:/viewPro");
+		return new ModelAndView("redirect:/admin/viewPro");
 	}
 	
 	
+	@ModelAttribute
+	public void categoryList(Model m) 
+	{
 	
+		m.addAttribute("catlist",categorydao.categoryList());
+		m.addAttribute("productlist",productdao.getProductList());
+		
+	}
 	
 	
 	

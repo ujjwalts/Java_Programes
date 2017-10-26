@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,6 +35,7 @@ public class User {
 	private String password;
 	
 	
+
 	private String role;//  during spring security //it will be assigned in controller
 	
 	@NotNull @Length(min=10, max=10, message="Mob no should be at of 10 digits") 
@@ -47,6 +49,8 @@ public class User {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="user")
 	private Set<Orders> order = new HashSet<Orders>(0);
 
+	@OneToOne(mappedBy="user",fetch=FetchType.EAGER)
+	private Cart cart;
 	
 	public boolean isEnabled() {
 		return enabled;
@@ -64,6 +68,14 @@ public class User {
 		this.order = order;
 	}
 
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 	public String getRole() {
 		return role;
 	}

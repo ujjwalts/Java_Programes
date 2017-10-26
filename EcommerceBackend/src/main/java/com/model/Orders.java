@@ -19,6 +19,7 @@ public class Orders {
 	private double totalamt;
 	private String paymenttype;
 	
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="email")
 	private User user;
@@ -30,6 +31,7 @@ public class Orders {
 	public void setOid(int oid) {
 		this.oid = oid;
 	}
+
 	public double getTotalamt() {
 		return totalamt;
 	}
@@ -43,5 +45,11 @@ public class Orders {
 		this.paymenttype = paymenttype;
 	}
 	
-
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }

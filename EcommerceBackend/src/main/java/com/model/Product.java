@@ -17,13 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 
 public class Product {
+
 	@Id
 	@GeneratedValue
 	private int proid;
 	private String proname;
 	private String description;
-	private String stock;
-	private String price;
+	private long stock;
+	private double price;
 	
 	@Transient
 	private MultipartFile pImage;
@@ -74,20 +75,18 @@ public class Product {
 		this.description = description;
 	}
 	
-	public String getStock() {
+	public long getStock() {
 		return stock;
 	}
-	public void setStock(String stock) {
+	public void setStock(long stock) {
 		this.stock = stock;
 	}
-	
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	
 	
 	public MultipartFile getpImage() {
 		return pImage;

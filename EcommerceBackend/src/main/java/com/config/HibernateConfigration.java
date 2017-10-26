@@ -12,6 +12,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.model.Cart;
+
 import com.model.Category;
 import com.model.Orders;
 import com.model.Product;
@@ -25,7 +27,7 @@ import com.model.User;
 
 
 public class HibernateConfigration {
-	@Bean//@Bean is used to mention or give or determine the behaviour of the pojo class with a particular bean name
+	@Bean(name="myDataSource")//@Bean is used to mention or give or determine the behaviour of the pojo class with a particular bean name
 	public DataSource getH2DataSource()
 	{
 	System.out.println("Data Source Method");
@@ -56,6 +58,9 @@ public class HibernateConfigration {
 	sessionBuilder.addAnnotatedClass(Category.class);
 	sessionBuilder.addAnnotatedClass(Supplier.class);
 	sessionBuilder.addAnnotatedClass(Orders.class);
+	sessionBuilder.addAnnotatedClass(Cart.class);
+
+	
 	//sessionBuilder.scanPackages("com.model");
 	return sessionBuilder.buildSessionFactory();
 	}

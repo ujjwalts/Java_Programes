@@ -3,20 +3,21 @@
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
     
 <html>
 <%@ page isELIgnored="false"%>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update Product</title>
+    <style>
+.ca{
+    padding-top: 150px;
+}
+</style>
 </head>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
-
-<form:form modelAttribute="cmdd" method="post" action="/EcommerceFrontend/Save" enctype="multipart/form-data" >    
+<div class="ca">
+<form:form modelAttribute="cmdd" method="post" action="/EcommerceFrontend/admin/Save" enctype="multipart/form-data" >    
         <table>
         <tr>  
          
@@ -29,6 +30,10 @@
          <tr>    
           <td>Description :</td>    
           <td><form:input path="description" /></td>  
+         </tr> 
+         <tr>  
+          <td>Stock :</td>    
+          <td><form:input path="stock" /></td>  
          </tr>   
           
           <tr>    
@@ -37,7 +42,7 @@
          </tr>   
         
         <tr><td> <select name="categoryId" id="procat" class="form-control">
-         <option value="NONE" >--- Select Category ---</option>
+         <option value="0" >--- Select Category ---</option>
         <c:forEach var="cat" items="${catlist}">
         <option value="${cat.categoryid}">${cat.categoryname}</option>
         </c:forEach>
@@ -67,5 +72,6 @@
             
          </table>
        </form:form> 
+       </div>
 </body>
 </html>
